@@ -19,15 +19,15 @@ pip3 install -r requirements.txt
 #### Предобработка данных для обучения моделей
 Выполните в терминале следующие команды:
 ```shell script
-python3 video_improvement/scripts/preprocess_dataset.py \
+python3 denoising_pipeline/scripts/preprocess_dataset.py \
   --dataset-path=data/dataset/after_iphone_denoising/ --verbose
 ```
 ```shell script
-python3 video_improvement/scripts/preprocess_dataset.py \
+python3 denoising_pipeline/scripts/preprocess_dataset.py \
   --dataset-path=data/dataset/real_sense_noise/ --verbose
 ```
 ```shell script
-python3 video_improvement/scripts/preprocess_dataset.py \
+python3 denoising_pipeline/scripts/preprocess_dataset.py \
   --dataset-path=data/dataset/webcam/ --verbose
 ```
 
@@ -35,7 +35,7 @@ python3 video_improvement/scripts/preprocess_dataset.py \
 
 #### Конфигурация программного комплекса обучения
 
-Скопируйте файл конфигурации `video_improvement/configuration/example_train_config.yml`
+Скопируйте файл конфигурации `denoising_pipeline/configuration/example_train_config.yml`
 в рабочую дирикторию `data/`.
 
 Или же вы можете использовать конфигурацию из следующего примера в сериализации YAML:
@@ -114,7 +114,7 @@ train:
 
 #### Запуск обучения моделей
 Для обучения шумоподавляющих моделей используется следующий скрипт: 
-`python3 video_improvement/train/train.py`.
+`python3 denoising_pipeline/train/train.py`.
 До запуска скрипта необходимо настроить окружение, 
 для этого нужно выполнить следующую команду:
 ```shell script
@@ -151,7 +151,7 @@ export PYTHONPATH=./
 
 #### Запуск скрипта для шумоподавления изображения
 Для применения шумоподавляющей сети к изображению используется следующий скрипт: 
-`video_improvement/test/inference_by_image.py`
+`denoising_pipeline/test/inference_by_image.py`
 
 
 Описание скрипта для шумоподавления изображения:
@@ -177,7 +177,7 @@ optional arguments:
 
 #### Запуск скрипта для шумоподавления видео
 Для применения шумоподавляющей сети к видео файлу используется следующий скрипт: 
-`video_improvement/test/inference_by_video.py`
+`denoising_pipeline/test/inference_by_video.py`
 
 Описание скрипта для шумоподавления видео
 ```shell script
