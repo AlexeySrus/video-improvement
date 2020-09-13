@@ -1,0 +1,62 @@
+visualization:
+  use_visdom: True
+  visdom_port: 9000
+  visdom_server: 'http://localhost'
+
+  image:
+    every: 10
+    scale: 2
+
+model:
+  window_size: 224
+
+  architecture: 'simple' # choose from 'simple', 'sequential' (work only with series dataset type), 'advanced' (use image frequency decomposition)
+
+  sequential:
+    series_size: 5
+    n: 5
+    residuals: True
+    filters_per_image: 32
+
+  advanced:
+    separate_filters_count: 1
+    union_filters_count: 1
+
+dataset:
+  type: 'pair' # choose from 'pair', 'series', 'sequential', 'separate' (requires a large amount of RAM)
+
+  pair:
+    image1_path: 'path to first image from pair'
+    image2_path: 'path to second image from pair'
+
+  series:
+    images_series_folder: 'path to folder with images folder from one series'
+
+  sequential:
+    images_series_folder: 'path to folder with images folders from series'
+
+  separate:
+    images_series_folder: 'path to noisy images'
+    clear_images_path: 'path to clear images'
+
+train:
+  optimizer: 'sgd' # choose from 'adam', 'nadam', 'radam', 'sgd'
+  lr: 0.0000001
+  weight_decay: 0
+
+  loss: 'mse' # choose from 'mse', 'l1', 'fourier_loss' (experimental loss)
+
+  epochs: 150
+  batch_size: 1
+  number_of_processes: 12
+
+  distribution_learning:
+    enable: False
+    devices: ['cuda:0', 'cuda:1']
+
+  save:
+    model: 'path to saved weights and logs'
+    every: 10
+
+  load_model: False
+  load_optimizer: False
