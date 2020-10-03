@@ -114,7 +114,7 @@ def main():
 
     if config['visualization']['use_visdom']:
         plots = VisPlot(
-            'Video train',
+            'Image denoising train',
             server=config['visualization']['visdom_server'],
             port=config['visualization']['visdom_port']
         )
@@ -122,16 +122,22 @@ def main():
         plots.register_scatterplot('train loss per_batch', 'Batch number',
                                    'Loss',
                                    [
-                                       'mse between y_pred and y_true',
-                                       'mse between y_pred and x'
+                                       '{} between predicted and ground truth'
+                                       ''.format(config['train']['loss']),
+                                       '{} between predicted and input'
+                                       ''.format(config['train']['loss'])
                                    ])
 
         plots.register_scatterplot('train validation loss per_epoch',
                                    'Batch number',
                                    'Loss',
                                    [
-                                       'mse train loss',
-                                       'double mse train loss'
+                                       '{} train loss'.format(
+                                           config['train']['loss']
+                                       ),
+                                       'double {} train loss'.format(
+                                           config['train']['loss']
+                                       )
                                    ])
 
         callbacks.append(plots)
